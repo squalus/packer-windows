@@ -6,11 +6,20 @@ Write-Output "AutoStart: $AutoStart"
 $is_64bit = [IntPtr]::size -eq 8
 
 # setup openssh
-$ssh_download_url = "http://www.mls-software.com/files/setupssh-7.1p1-1.exe"
+$ssh_download_sha1 = "31cdffb879ab73c8ecbcbccab6f3c0f882ab6548"
+$ssh_download_url = "https://www.mls-software.com/files/setupssh-7.6p1-1.exe"
 
 if (!(Test-Path "C:\Program Files\OpenSSH\bin\ssh.exe")) {
     Write-Output "Downloading $ssh_download_url"
     (New-Object System.Net.WebClient).DownloadFile($ssh_download_url, "C:\Windows\Temp\openssh.exe")
+    Write-Host "Checking hash"
+    $hash = Get-FileHash "C:\Windows\Temp\openssh.exe" -Algorithm SHA1
+    if ($hash.Hash -eq $ssh_download_sha1) {
+        Write-Host "Hash matches"
+    } else {
+        Write-Host "Hash mismatch"
+        [Environment]::Exit(1)
+    }
 
     # initially set the port to 2222 so that there is not a race
     # condition in which packer connects to SSH before we can disable the service
