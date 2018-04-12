@@ -2,6 +2,13 @@
 Set-MpPreference -DisableRealtimeMonitoring $true
 Set-MpPreference -SubmitSamplesConsent 2
 Set-MpPreference -MAPSReporting 0
+Set-MpPreference -ScanScheduleDay Never
+Set-MpPreference -DisableScanningNetworkFiles $true
+Set-MpPreference -SignatureScheduleDay Never
+Set-MpPreference -DisableBehaviorMonitoring $true
+Set-MpPreference -DisableArchiveScanning $true
+Set-MpPreference -DisableScriptScanning $true
+Set-MpPreference -DisableIntrusionPreventionSystem $true
 
 # Windows update off
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoUpdate" -value 1
