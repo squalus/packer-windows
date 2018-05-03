@@ -1,6 +1,6 @@
 $ErrorActionPreference = "Stop"
-$version = "1801"
-$sha256 = "b23f97c230a921f834550d2bf467d313952861f641f49ca93ccddd9d2e0300e2"
+$version = "1805"
+$sha256 = "898c1ca0015183fe2ba7d55cacf0a1dea35e873bf3f8090f362a6288c6ef08d7"
 
 $filename = "7z$version-x64.msi"
 $downloadFolder = "$home\Downloads"
